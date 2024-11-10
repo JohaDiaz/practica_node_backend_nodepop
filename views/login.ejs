@@ -1,0 +1,102 @@
+<%- include('header.ejs') %>
+
+<div class="container">
+    <div class="container pt-5">
+        <div class="row">
+          <div class="col-md-8 order-md-2 col-lg-9">
+            <div class="container-fluid">
+              <section>
+                <div class="container mt-3">
+                  <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                      <div class="card shadow-0 border rounded-3">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                              <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
+                                <a href="#!">
+                                  <div class="hover-overlay">
+                                    <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-6">
+                              <h5>Camisa</h5>
+                              <p class="text-truncate mb-4 mb-md-0">
+                                Excelente producto.
+                               </p>
+                              <div class="mt-1 mb-0 text-muted small">
+                                <input class="btn btn-primary btn-sm" type="button" value="Input">
+                                <input class="btn btn-primary btn-sm" type="button" value="Input">
+                                <input class="btn btn-primary btn-sm" type="button" value="Input">
+                                <input class="btn btn-primary btn-sm" type="button" value="Input">
+                              </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                              <div class="d-flex flex-row align-items-center mb-1">
+                                <h4 class="mb-1 me-1">$13.99</h4>
+                              </div>
+                              <h6 class="text-success">Oferta Especial</h6>
+                              <div class="d-flex flex-column mt-5">
+                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary" type="button">Borrar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+             
+
+              <div class="row sorting mb-5 mt-5">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
+            <h4>FILTRAR POR:</h4>
+            <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">Nombre del producto</h6>
+        <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          </div>
+            <h6 class="text-uppercase font-weight-bold mb-3">TAG</h6>
+            <div class="mt-2 mb-2 pl-2">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="category-1">
+                <label class="custom-control-label" for="category-1">Work</label>
+              </div>
+            </div>
+            <div class="mt-2 mb-2 pl-2">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="category-2">
+                <label class="custom-control-label" for="category-2">Lifestyle</label>
+              </div>
+            </div>
+            <div class="mt-2 mb-2 pl-2">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="category-3">
+                <label class="custom-control-label" for="category-3">Motor</label>
+              </div>
+            </div>
+            <div class="mt-2 mb-2 pl-2">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="category-4">
+                <label class="custom-control-label" for="category-4">Mobile</label>
+              </div>
+            </div>
+            <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">Precio</h6>
+            <div class="price-filter-control">
+              <input type="number" class="form-control w-50 pull-left mb-2" value="50" id="price-min-control">
+              <input type="number" class="form-control w-50 pull-right" value="150" id="price-max-control">
+            </div>
+            <input id="ex2" type="text" class="slider " value="50,150" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" data-value="50,150" style="display: none;">
+            <div class="mt-4 mb-5"></div>
+            <a href="#" class="btn btn-lg btn-block btn-primary mb-5">Mostrar Resultados</a>
+          </div>
+        </div>
+      </div>
+</div>
+<%- include('footer.ejs') %>
