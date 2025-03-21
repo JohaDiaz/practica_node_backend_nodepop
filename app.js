@@ -1,9 +1,14 @@
 import * as homeController from './controllers/homeControllers.js'
 import * as loginController from './controllers/loginControllers.js'
 import * as newproductController from './controllers/newproductControllers.js'
+import connectMongoose from './lib/connectMongoose.js'
 import express from 'express'
 import createError from 'http-errors'
 import logger from 'morgan'
+import * as sessionManager from './lib/sessionManager.js'
+
+await connectMongoose()
+console.log('Conectado a MongoDB.')
 
 const app = express()
 
@@ -12,14 +17,22 @@ app.locals.appName = 'NodeApp'
 app.set('views', 'views') // views folder
 app.set('view engine', 'ejs')
 
-app.use(logger('dev'))
+app.use(logger('dev')) //morgan 
 app.use(express.json()) // parsear el body que venga en formato JSON
 app.use(express.urlencoded({ extended: false })) // parsear el body que venga urlencoded (formularios)
 app.use(express.static('public'))
 
+/**
+ * Aplication Routes
+ */
+
+app.use(sessionManager.middleware, sessionManager.useSessionInViews)
+
+ 
 app.get('/', homeController.index)
 app.get('/login', loginController.index)
 app.get('/newproduct', newproductController.index)
+app.post('/login', loginController.postLogin)
 
 
 
