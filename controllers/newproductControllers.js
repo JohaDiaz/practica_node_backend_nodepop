@@ -1,3 +1,3 @@
 export function index(req, res, next) {
-    res.render('newproduct')
+  res.render("newproduct");
 }

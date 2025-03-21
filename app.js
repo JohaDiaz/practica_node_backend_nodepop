@@ -1,11 +1,11 @@
 import * as homeController from "./controllers/homeControllers.js";
 import * as loginController from "./controllers/loginControllers.js";
 import * as newproductController from "./controllers/newproductControllers.js";
+import * as sessionManager from "./lib/sessionManager.js";
 import connectMongoose from "./lib/connectMongoose.js";
 import express from "express";
 import createError from "http-errors";
 import logger from "morgan";
-import * as sessionManager from "./lib/sessionManager.js";
 
 await connectMongoose();
 console.log("Conectado a MongoDB.");
@@ -30,9 +30,11 @@ app.use(sessionManager.middleware, sessionManager.useSessionInViews);
 
 app.get("/", homeController.index);
 app.get("/login", loginController.index);
-app.get("/newproduct", newproductController.index);
 app.post("/login", loginController.postLogin);
 app.all("/logout", loginController.logout);
+
+// private page
+app.get("/newproduct", sessionManager.guard, newproductController.index);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
