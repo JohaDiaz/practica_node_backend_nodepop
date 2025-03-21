@@ -93,6 +93,14 @@
           >Mostrar Resultados</a
         >
       </div>
+
+      <% // contenido para usuarios NO logados %> <% if (!session.userId) { %>
+
+      <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
+
+      <% } %> <% // contenido para usuarios logados %> <% if (session.userId) {
+      %>
+
       <div class="col-md-8 order-md-2 col-lg-9">
         <div class="container-fluid">
           <section>
@@ -180,6 +188,8 @@
           <div class="row sorting mb-5 mt-5"></div>
         </div>
       </div>
+
+      <% } %>
     </div>
   </div>
 </div>
