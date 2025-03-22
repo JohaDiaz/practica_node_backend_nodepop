@@ -8,7 +8,8 @@ export function index(req, res, next) {
 
 export async function postNew(req, res, next) {
   try {
-    const userId = req.session.userID;
+    const userId = req.session.userId;
+    console.log("Usuario que crea producto:", userId);
 
     const { product, price, tags } = req.body;
     const image = "/multiple-products.jpg";
