@@ -35,6 +35,7 @@ app.all("/logout", loginController.logout);
 
 // private page
 app.get("/newproduct", sessionManager.guard, newproductController.index);
+app.post("/newproduct", sessionManager.guard, newproductController.postNew);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

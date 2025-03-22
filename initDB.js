@@ -1,5 +1,7 @@
 import connectMoongoose from "./lib/connectMongoose.js";
 import User from "./models/User.js";
+import Product from "./models/Product.js";
+import Tag from "./models/Tag.js";
 import readline from "node:readline";
 
 const connection = await connectMoongoose();
@@ -14,8 +16,89 @@ if (questionResponse.toLowerCase() !== "yes") {
 }
 
 await initUsers();
+await initTags();
+await initProducts();
 
 connection.close();
+
+// create initial products
+async function initProducts() {
+  // delete all products
+  const deleteResult = await Product.deleteMany();
+  console.log(`Deleted ${deleteResult.deletedCount} products.`);
+
+  const [admin, user1, joha] = await Promise.all([
+    User.findOne({ email: "admin@example.com" }),
+    User.findOne({ email: "user1@example.com" }),
+    User.findOne({ email: "joha@kc.io" }),
+  ]);
+
+  // Create the inital data for Tag table
+
+  const [lifestyleTag, workTag, motorTag, mobileTag] = await Promise.all([
+    Tag.findOne({ tagname: "lifestyle" }),
+    Tag.findOne({ tagname: "work" }),
+    Tag.findOne({ tagname: "motor" }),
+    Tag.findOne({ tagname: "mobile" }),
+  ]);
+
+  const image = "/multiple-products.jpg";
+
+  // create initial products
+  const insertResult = await Product.insertMany([
+    {
+      product: "Camiseta",
+      price: 20,
+      image,
+      tags: [lifestyleTag._id],
+      owner: joha._id,
+    },
+    {
+      product: "Pantalon",
+      price: 30,
+      image,
+      tags: [lifestyleTag._id],
+      owner: joha._id,
+    },
+    {
+      product: "Zapatillas",
+      price: 100,
+      image,
+      tags: [workTag._id],
+      owner: admin._id,
+    },
+    {
+      product: "Smarthphone",
+      price: 430,
+      image,
+      tags: [mobileTag._id],
+      owner: user1._id,
+    },
+    {
+      product: "Casco",
+      price: 90,
+      image,
+      tags: [motorTag._id],
+      owner: joha._id,
+    },
+  ]);
+  console.log(`Created ${insertResult.length} products.`);
+}
+
+//initTags
+
+async function initTags() {
+  const deleteResult = await Tag.deleteMany();
+  console.log(`Deleted ${deleteResult.deletedCount} tags.`);
+
+  const tagsToInsert = ["lifestyle", "work", "motor", "mobile"];
+  const insertResult = await Tag.insertMany(
+    tagsToInsert.map((tagname) => ({ tagname }))
+  );
+  console.log(`Created ${insertResult.length} tags.`);
+}
+
+//initUsers
 
 async function initUsers() {
   //detele all users

@@ -94,18 +94,17 @@
         >
       </div>
 
-      <% // contenido para usuarios NO logados %> <% if (!session.userId) { %>
-
+      <% if (!session.userId) { %>
       <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
-
-      <% } %> <% // contenido para usuarios logados %> <% if (session.userId) {
-      %>
-
+      <% } %> <% if (session.userId) { %>
       <div class="col-md-8 order-md-2 col-lg-9">
         <div class="container-fluid">
           <section>
             <div class="container mt-3">
               <div class="row">
+                <% if (products.length === 0) { %>
+                <p>No tienes productos creados aún.</p>
+                <% } else { %> <% products.forEach(product => { %>
                 <div class="col-md-12 col-xl-12">
                   <div class="card shadow-0 border rounded-3">
                     <div class="card-body">
@@ -115,11 +114,11 @@
                             class="bg-image hover-zoom ripple rounded ripple-surface"
                           >
                             <img
-                              src="https://via.placeholder.com/240x240/5fa9f8/efefef"
+                              src="<%= product.image %>"
                               class="img-fluid mx-auto d-block"
-                              alt="Card image cap"
+                              alt="<%= product.product %>"
                             />
-                            <a href="#!">
+                            <a href="#">
                               <div class="hover-overlay">
                                 <div
                                   class="mask"
@@ -132,30 +131,34 @@
                           </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-xl-6">
-                          <h5>Camisa</h5>
+                          <h5><%= product.product %></h5>
                           <p class="text-truncate mb-4 mb-md-0">
-                            Excelente producto.
+                            <% product.tags.forEach(tag => { %>
+                            <span class="badge bg-primary"
+                              ><%= tag.tagname %></span
+                            >
+                            <% }) %>
                           </p>
                           <div class="mt-1 mb-0 text-muted small">
                             <input
                               class="btn btn-primary btn-sm"
                               type="button"
-                              value="Input"
+                              value="Editar"
                             />
                             <input
                               class="btn btn-primary btn-sm"
                               type="button"
-                              value="Input"
+                              value="Favorito"
                             />
                             <input
                               class="btn btn-primary btn-sm"
                               type="button"
-                              value="Input"
+                              value="Compartir"
                             />
                             <input
                               class="btn btn-primary btn-sm"
                               type="button"
-                              value="Input"
+                              value="Eliminar"
                             />
                           </div>
                         </div>
@@ -163,16 +166,11 @@
                           class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start"
                         >
                           <div class="d-flex flex-row align-items-center mb-1">
-                            <h4 class="mb-1 me-1">$13.99</h4>
+                            <h4 class="mb-1 me-1">$<%= product.price %></h4>
                           </div>
                           <h6 class="text-success">Oferta Especial</h6>
                           <div class="d-flex flex-column mt-5">
-                            <button
-                              data-mdb-button-init
-                              data-mdb-ripple-init
-                              class="btn btn-primary"
-                              type="button"
-                            >
+                            <button class="btn btn-primary" type="button">
                               Borrar
                             </button>
                           </div>
@@ -181,16 +179,16 @@
                     </div>
                   </div>
                 </div>
+                <% }) %> <% } %>
               </div>
             </div>
           </section>
-
           <div class="row sorting mb-5 mt-5"></div>
         </div>
       </div>
-
       <% } %>
     </div>
   </div>
 </div>
+
 <%- include('footer.ejs') %>
