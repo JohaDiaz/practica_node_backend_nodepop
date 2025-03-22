@@ -96,7 +96,11 @@
       <!-- FIN FORMULARIO -->
 
       <% if (!session.userId) { %>
-      <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
+      <p>
+        <strong
+          >Para ver el contenido debes hacer <a href="/login">login</a></strong
+        >
+      </p>
       <% } %> <% if (session.userId) { %>
       <div class="col-md-8 order-md-2 col-lg-9">
         <div class="container-fluid">
