@@ -5,94 +5,95 @@
     <p>Bienvenido <%= session.userId %></p>
 
     <div class="row">
-      <div class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
+      <% const selectedTags = Array.isArray(query?.tag) ? query.tag : query?.tag
+      ? [query.tag] : []; %>
+      <!-- Añadido para manejar múltiples tags -->
+      <form method="GET" class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
+        <!-- FORMULARIO DE FILTROS -->
+
         <h4>FILTRAR POR:</h4>
+
+        <!-- FILTRO: NOMBRE -->
         <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">
           Nombre del producto
         </h6>
         <div class="input-group input-group-sm mb-3">
           <input
             type="text"
+            name="name"
+            value="<%= typeof query?.name !== 'undefined' ? query.name : '' %>"
             class="form-control"
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
           />
         </div>
+
+        <!-- FILTRO: TAGS -->
         <h6 class="text-uppercase font-weight-bold mb-3">TAG</h6>
+
         <div class="mt-2 mb-2 pl-2">
           <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="category-1"
-            />
+            <input type="checkbox" name="tag[]" value="work"
+            class="custom-control-input" id="category-1" <%=
+            selectedTags.includes('work') ? 'checked' : '' %> />
             <label class="custom-control-label" for="category-1">Work</label>
           </div>
         </div>
+
         <div class="mt-2 mb-2 pl-2">
           <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="category-2"
-            />
+            <input type="checkbox" name="tag[]" value="lifestyle"
+            class="custom-control-input" id="category-2" <%=
+            selectedTags.includes('lifestyle') ? 'checked' : '' %> />
             <label class="custom-control-label" for="category-2"
               >Lifestyle</label
             >
           </div>
         </div>
+
         <div class="mt-2 mb-2 pl-2">
           <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="category-3"
-            />
+            <input type="checkbox" name="tag[]" value="motor"
+            class="custom-control-input" id="category-3" <%=
+            selectedTags.includes('motor') ? 'checked' : '' %> />
             <label class="custom-control-label" for="category-3">Motor</label>
           </div>
         </div>
+
         <div class="mt-2 mb-2 pl-2">
           <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="category-4"
-            />
+            <input type="checkbox" name="tag[]" value="mobile"
+            class="custom-control-input" id="category-4" <%=
+            selectedTags.includes('mobile') ? 'checked' : '' %> />
             <label class="custom-control-label" for="category-4">Mobile</label>
           </div>
         </div>
+
+        <!-- FILTRO: PRECIO -->
         <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">Precio</h6>
         <div class="price-filter-control">
           <input
             type="number"
+            name="min"
+            value="<%= typeof query?.min !== 'undefined' ? query.min : '' %>"
             class="form-control w-50 pull-left mb-2"
-            value="50"
-            id="price-min-control"
+            placeholder="Min"
           />
           <input
             type="number"
+            name="max"
+            value="<%= typeof query?.max !== 'undefined' ? query.max : '' %>"
             class="form-control w-50 pull-right"
-            value="150"
-            id="price-max-control"
+            placeholder="Max"
           />
         </div>
-        <input
-          id="ex2"
-          type="text"
-          class="slider"
-          value="50,150"
-          data-slider-min="10"
-          data-slider-max="200"
-          data-slider-step="5"
-          data-slider-value="[50,150]"
-          data-value="50,150"
-          style="display: none"
-        />
+
         <div class="mt-4 mb-5"></div>
-        <a href="#" class="btn btn-lg btn-block btn-primary mb-5"
-          >Mostrar Resultados</a
-        >
-      </div>
+        <button type="submit" class="btn btn-lg btn-block btn-primary mb-5">
+          Mostrar Resultados
+        </button>
+      </form>
+      <!-- FIN FORMULARIO -->
 
       <% if (!session.userId) { %>
       <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
