@@ -139,28 +139,6 @@
                             >
                             <% }) %>
                           </p>
-                          <div class="mt-1 mb-0 text-muted small">
-                            <input
-                              class="btn btn-primary btn-sm"
-                              type="button"
-                              value="Editar"
-                            />
-                            <input
-                              class="btn btn-primary btn-sm"
-                              type="button"
-                              value="Favorito"
-                            />
-                            <input
-                              class="btn btn-primary btn-sm"
-                              type="button"
-                              value="Compartir"
-                            />
-                            <input
-                              class="btn btn-primary btn-sm"
-                              type="button"
-                              value="Eliminar"
-                            />
-                          </div>
                         </div>
                         <div
                           class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start"
@@ -170,9 +148,11 @@
                           </div>
                           <h6 class="text-success">Oferta Especial</h6>
                           <div class="d-flex flex-column mt-5">
-                            <button class="btn btn-primary" type="button">
-                              Borrar
-                            </button>
+                            <a
+                              href="/delete/<%= product._id %>"
+                              class="btn btn-danger"
+                              >Borrar</a
+                            >
                           </div>
                         </div>
                       </div>
